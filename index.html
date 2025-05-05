@@ -280,7 +280,6 @@
       .whitepaper-section {
         width: min(90%, 700px);
         aspect-ratio: 8.5 / 11;
-
         background-color: #343434;
         border-radius: 8px;
         border: 2px solid #333333;
@@ -299,16 +298,16 @@
       <section id="about">
         <video
           class="logo-video"
-          autoplay
           muted
           playsinline
+          preload="none"
+          data-src="assets/videos/logo.mp4"
           oncontextmenu="return false;"
-          src="assets/videos/logo.mp4"
         ></video>
         <h2 class="section-title">About Me</h2>
         <div class="about-card">
           <p>
-            Hello! I'm Theo Grigorenko, a high school student intereted in
+            Hello! I'm Theo Grigorenko, a high school student interested in
             numerical simulations and applied artificial intelligence
             (especially with robotics).
           </p>
@@ -333,12 +332,13 @@
             <h3>Satya</h3>
             <div class="media-item">
               <div class="media-wrapper">
-                <video controls muted playsinline>
-                  <source
-                    src="assets/videos/satya-video.webm"
-                    type="video/webm"
-                  />
-                </video>
+                <video
+                  controls
+                  muted
+                  playsinline
+                  preload="none"
+                  data-src="assets/videos/satya-video.webm"
+                ></video>
               </div>
               <p class="media-description">
                 Voting functionality on the Satya app
@@ -359,19 +359,20 @@
             <h3>Drone Tracking</h3>
             <div class="media-item">
               <div class="media-wrapper">
-                <video controls muted playsinline>
-                  <source
-                    src="assets/videos/drone-video.mp4"
-                    type="video/mp4"
-                  />
-                </video>
+                <video
+                  controls
+                  muted
+                  playsinline
+                  preload="none"
+                  data-src="assets/videos/drone-video.webm"
+                ></video>
               </div>
               <p class="media-description">Drone tracking demonstration</p>
             </div>
             <p>
               Accurate drone tracking with a laser using custom-trained
-              <b>objection detection (yolov4)</b> and
-              <b>optimal control (kalman filter)</b>.
+              <b>object detection (YOLOv4)</b> and
+              <b>optimal control (Kalman filter)</b>.
             </p>
           </div>
 
@@ -379,36 +380,41 @@
             <h3>Electric Vehicle (SciOly Event)</h3>
             <div class="media-item">
               <div class="media-wrapper">
-                <video controls muted playsinline>
-                  <source src="assets/videos/ev-video.mp4" type="video/mp4" />
-                </video>
+                <video
+                  controls
+                  muted
+                  playsinline
+                  preload="none"
+                  data-src="assets/videos/ev-video.webm"
+                ></video>
               </div>
-              <p class="media-description">New York States performance</p>
+              <p class="media-description">New York State performance</p>
             </div>
             <p>
-              Science Olympiad event with the objective of a minuature electric
-              vehicle traveling a distance (8 meter to 10 meter) with the
+              Science Olympiad event with the objective of a miniature electric
+              vehicle traveling a distance (8 meters to 10 meters) with the
               <b>greatest accuracy and speed</b>.
             </p>
-
             <p>
-              I won a <b>silver medal</b> at the New York States competition
-              (2025) using with a <b>PID controller</b> to modulate the voltage
+              I won a <b>silver medal</b> at the New York State competition
+              (2025) using a <b>PID controller</b> to modulate the voltage
               applied to the motor.
             </p>
           </div>
         </div>
 
         <div class="selected-project-container">
+          <!-- Satya -->
           <div class="selected-project" data-id="satya">
             <div class="media-item">
               <div class="media-wrapper">
-                <video controls muted playsinline>
-                  <source
-                    src="assets/videos/satya-video.webm"
-                    type="video/webm"
-                  />
-                </video>
+                <video
+                  controls
+                  muted
+                  playsinline
+                  preload="none"
+                  data-src="assets/videos/satya-video.webm"
+                ></video>
               </div>
               <p class="media-description">
                 Voting functionality on the Satya app
@@ -419,7 +425,8 @@
               <div class="media-item">
                 <div class="media-wrapper">
                   <img
-                    src="assets/images/satya-image1.png"
+                    data-src="assets/images/satya-image1.png"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
                     alt="Satya image 1"
                   />
                 </div>
@@ -430,7 +437,8 @@
               <div class="media-item">
                 <div class="media-wrapper">
                   <img
-                    src="assets/images/satya-image2.png"
+                    data-src="assets/images/satya-image2.png"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
                     alt="Satya image 2"
                   />
                 </div>
@@ -449,14 +457,14 @@
               consensus.
             </p>
             <p>
-              The charts / graphs above show a simulation of random truthfull
+              The charts and graphs above show a simulation of random truthful
               and malicious agents assigned an intelligence value. The agents
-              are then given statements to vote on and the simulation shows how
-              the estimation of agents' experience changes over time and
+              are then given statements to vote on, and the simulation shows how
+              the estimation of agents' experience changes over time and the
               resilience of estimation.
             </p>
 
-            <p>The app is avaliable on Windows and IOS.</p>
+            <p>The app is available on Windows and iOS.</p>
             <div
               style="
                 width: 100%;
@@ -480,9 +488,9 @@
                 justify-content: space-around;
               "
             >
-              <div class="whitepaper-section appear" id="whitepaper-section">
+              <div class="whitepaper-section" id="whitepaper-section">
                 <iframe
-                  src="assets/pdfs/whitepaper.pdf"
+                  data-src="assets/pdfs/whitepaper.pdf"
                   frameborder="0"
                   class="whitepaper"
                   id="whitepaper"
@@ -491,15 +499,17 @@
             </div>
           </div>
 
+          <!-- Drone -->
           <div class="selected-project" data-id="drone">
             <div class="media-item">
               <div class="media-wrapper">
-                <video controls muted playsinline>
-                  <source
-                    src="assets/videos/drone-video.mp4"
-                    type="video/mp4"
-                  />
-                </video>
+                <video
+                  controls
+                  muted
+                  playsinline
+                  preload="none"
+                  data-src="assets/videos/drone-video.webm"
+                ></video>
               </div>
               <p class="media-description">Drone tracking demonstration</p>
             </div>
@@ -507,7 +517,8 @@
               <div class="media-item">
                 <div class="media-wrapper">
                   <img
-                    src="assets/images/drone-image1.png"
+                    data-src="assets/images/drone-image1.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
                     alt="Drone Tracking image 1"
                   />
                 </div>
@@ -516,7 +527,8 @@
               <div class="media-item">
                 <div class="media-wrapper">
                   <img
-                    src="assets/images/drone-image2.png"
+                    data-src="assets/images/drone-image2.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
                     alt="Drone Tracking image 2"
                   />
                 </div>
@@ -525,9 +537,9 @@
             </div>
             <p>This project accurately tracks a drone with a laser.</p>
             <p>
-              It detects the drone from a <b>live video feed</b> from an iphone
-              using the <b>yolov4 model</b> which was trained on a self
-              collected and annotated dataset.
+              It detects the drone from a <b>live video feed</b> from an iPhone
+              using the <b>YOLOv4 model</b> which was trained on a
+              self-collected and annotated dataset.
             </p>
             <p>
               The camera distortion (pixel to motor angle) and laser position
@@ -535,7 +547,7 @@
               <b>calibrated</b>.
             </p>
             <p>
-              Two stepper motors controlled with an <b>arduino</b> rotate the
+              Two stepper motors controlled with an <b>Arduino</b> rotate the
               camera and laser to track the position of the drone.
             </p>
             <p>
@@ -544,20 +556,26 @@
             </p>
           </div>
 
+          <!-- EV -->
           <div class="selected-project" data-id="ev">
             <div class="media-item">
               <div class="media-wrapper">
-                <video controls muted playsinline>
-                  <source src="assets/videos/ev-video.mp4" type="video/mp4" />
-                </video>
+                <video
+                  controls
+                  muted
+                  playsinline
+                  preload="none"
+                  data-src="assets/videos/ev-video.webm"
+                ></video>
               </div>
-              <p class="media-description">New York States performance</p>
+              <p class="media-description">New York State performance</p>
             </div>
             <div class="images-container">
               <div class="media-item">
                 <div class="media-wrapper">
                   <img
-                    src="assets/images/ev-image1.png"
+                    data-src="assets/images/ev-image1.webp"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
                     alt="Electric Vehicle image 1"
                   />
                 </div>
@@ -566,7 +584,8 @@
               <div class="media-item">
                 <div class="media-wrapper">
                   <img
-                    src="assets/images/ev-image2.png"
+                    data-src="assets/images/ev-image2.png"
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
                     alt="Electric Vehicle image 2"
                   />
                 </div>
@@ -574,14 +593,13 @@
               </div>
             </div>
             <p>
-              Science Olympiad event with the objective of a minuature electric
-              vehicle traveling a distance (8 meter to 10 meter) with the
+              Science Olympiad event with the objective of a miniature electric
+              vehicle traveling a distance (8 meters to 10 meters) with the
               <b>greatest accuracy and speed</b>.
             </p>
-
             <p>
-              I won a <b>silver medal</b> at the New York States competition
-              (2025) using with a <b>PID controller</b> to modulate the voltage
+              I won a <b>silver medal</b> at the New York State competition
+              (2025) using a <b>PID controller</b> to modulate the voltage
               applied to the motor.
             </p>
           </div>
@@ -592,13 +610,128 @@
     <footer>© 2025 Theo Grigorenko</footer>
 
     <script>
-      // configure videos
+      document.querySelectorAll("video[data-src]").forEach((video) => {
+        function onFirstPlay(e) {
+          // only trigger if no src yet
+          if (!video.src && video.dataset.src) {
+            e.preventDefault(); // stop the no-op
+            video.removeEventListener("play", onFirstPlay);
+
+            // 1) point src at the real URL so browser starts fetching & shows its spinner
+            video.src = video.dataset.src;
+            // 2) load+play
+            video.load();
+            video.play().catch(() => {});
+          }
+        }
+        video.addEventListener("play", onFirstPlay);
+      });
+
+      const blobUrlCache = new Map();
+      const getBlobUrl = (url) => {
+        if (!blobUrlCache.has(url)) {
+          blobUrlCache.set(
+            url,
+            fetch(url)
+              .then((r) => r.blob())
+              .then((b) => URL.createObjectURL(b))
+          );
+        }
+        return blobUrlCache.get(url);
+      };
+
+      /* Configure basic attributes synchronously */
       document.querySelectorAll("video").forEach((v) => {
         v.muted = true;
         v.playsinline = true;
         if (!v.classList.contains("logo-video")) v.controls = true;
       });
 
+      /* ─── MAIN LOADING PIPELINE ─── */
+      window.addEventListener("load", async () => {
+        /* 1 — Logo video */
+        const logo = document.querySelector("video.logo-video[data-src]");
+        if (logo) {
+          try {
+            logo.src = await getBlobUrl(logo.dataset.src);
+            logo.load();
+            logo.play().catch(() => {});
+          } catch (e) {
+            console.warn("Logo video failed:", e);
+          }
+        }
+
+        /* 1b — Cover posters for the three hero videos (Satya / Drone / EV) */
+        const heroVids = Array.from(
+          document.querySelectorAll(
+            'video[data-src*="satya-video"],video[data-src*="drone-video"],video[data-src*="ev-video"]'
+          )
+        );
+
+        const posterPromises = heroVids.map((v) => {
+          const poster = v.dataset.src.replace(/\.\w+$/, ".webp");
+          v.poster = poster; // show cover
+          return new Promise((res) => {
+            const img = new Image();
+            img.onload = img.onerror = res; // resolve either way → unblock
+            img.src = poster; // triggers network fetch
+          });
+        });
+
+        /* WAIT until ALL three covers have downloaded (and painted) */
+        await Promise.all(posterPromises);
+
+        /* 2 — Inline <img> elements */
+        document
+          .querySelectorAll("img[data-src]")
+          .forEach((img) => (img.src = img.dataset.src));
+
+        /* 3 — Posters for every other video (if any) */
+        const allVideos = Array.from(
+          document.querySelectorAll("video[data-src]:not(.logo-video)")
+        );
+        const extraPosterPromises = allVideos
+          .filter((v) => !v.poster)
+          .map((v) => {
+            const poster = v.dataset.src.replace(/\.\w+$/, ".webp");
+            v.poster = poster;
+            return new Promise((res) => {
+              const img = new Image();
+              img.onload = img.onerror = res;
+              img.src = poster;
+            });
+          });
+
+        await Promise.all(extraPosterPromises);
+
+        /* 4 — Finally load EVERY video file */
+        const groups = allVideos.reduce((acc, el) => {
+          (acc[el.dataset.src] ??= []).push(el);
+          return acc;
+        }, {});
+
+        await Promise.all(
+          Object.entries(groups).map(async ([url, els]) => {
+            try {
+              const blobUrl = await getBlobUrl(url);
+              els.forEach((v) => {
+                v.src = blobUrl;
+                v.load();
+              });
+            } catch (e) {
+              console.warn("Video failed:", url, e);
+            }
+          })
+        );
+
+        /* 5 — Now load the whitepaper PDF */
+        const pdfEl = document.getElementById("whitepaper");
+        if (pdfEl && pdfEl.dataset.src) {
+          pdfEl.src = pdfEl.dataset.src;
+        }
+      });
+
+      /* ——— INTERACTIVITY (unchanged) ——— */
       document.addEventListener("DOMContentLoaded", () => {
         const featured = document.querySelector(".featured-projects");
         const detailContainer = document.querySelector(
@@ -609,10 +742,13 @@
         const title = document.getElementById("projects-title");
         let currentId = null;
 
+        const pauseNonLogoVideos = () =>
+          document
+            .querySelectorAll("video:not(.logo-video)")
+            .forEach((v) => v.pause());
+
         function clearSelection() {
-          document.querySelectorAll("video").forEach((v) => {
-            if (!v.classList.contains("logo-video")) v.pause();
-          });
+          pauseNonLogoVideos();
           detailContainer
             .querySelectorAll(".selected-project")
             .forEach((d) => (d.style.display = "none"));
@@ -623,24 +759,25 @@
         }
 
         function selectProject(id) {
-          document.querySelectorAll("video").forEach((v) => {
-            if (!v.classList.contains("logo-video")) v.pause();
-          });
+          pauseNonLogoVideos();
           featured.classList.add("hidden");
+
           if (currentId) {
-            detailContainer.querySelector(
+            const prev = detailContainer.querySelector(
               `.selected-project[data-id="${currentId}"]`
-            ).style.display = "none";
+            );
+            if (prev) prev.style.display = "none";
             document
               .querySelector(`.project-btn[data-id="${currentId}"]`)
               .classList.remove("active");
           }
+
           const detail = detailContainer.querySelector(
             `.selected-project[data-id="${id}"]`
           );
+          if (!detail) return;
           detail.style.display = "block";
-          const vid = detail.querySelector("video");
-          if (vid) vid.play();
+          detail.querySelector("video")?.play();
           document
             .querySelector(`.project-btn[data-id="${id}"]`)
             .classList.add("active");
@@ -650,31 +787,29 @@
 
         featuredCards.forEach((card) => {
           const vid = card.querySelector("video");
-          card.addEventListener("mouseenter", () => {
-            if (vid.paused) vid.play();
-          });
+          card.addEventListener("mouseenter", () => vid.paused && vid.play());
           card.addEventListener("mouseleave", () => {
             if (card.dataset.id !== currentId) vid.pause();
           });
           card.addEventListener("click", (e) => {
-            const tag = e.target.tagName.toLowerCase();
-            if (tag === "a" || tag === "video" || e.target.closest("video"))
+            if (
+              ["a", "video"].includes(e.target.tagName.toLowerCase()) ||
+              e.target.closest("video")
+            )
               return;
             selectProject(card.dataset.id);
           });
         });
 
-        buttons.forEach((btn) => {
+        buttons.forEach((btn) =>
           btn.addEventListener("click", () => {
-            const id = btn.dataset.id;
-            if (id === currentId) clearSelection();
-            else selectProject(id);
-          });
-        });
+            btn.dataset.id === currentId
+              ? clearSelection()
+              : selectProject(btn.dataset.id);
+          })
+        );
 
-        title.addEventListener("click", () => {
-          if (currentId) clearSelection();
-        });
+        title.addEventListener("click", () => currentId && clearSelection());
       });
     </script>
   </body>
