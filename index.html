@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="/assets/images/favicon.png" type="image/png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theo Grigorenko</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #0066cc;
+        --background-color: #fefefe;
+        --card-bg: #ffffff;
+        --text-color: #333;
+        --inactive-color: #888;
+        --accent-color: #0066cc;
+        --shadow: rgba(0, 0, 0, 0.05);
+        --media-bg: #f5f5f5;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        font-family: "Inter", sans-serif;
+        line-height: 1.4;
+        scroll-behavior: smooth;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 0.5em auto;
+        padding: 0 0.5em;
+      }
+
+      section + section {
+        margin-top: 1em;
+      }
+
+      #about {
+        position: relative;
+      }
+
+      .logo-video {
+        position: absolute;
+        top: 0;
+        right: -20px;
+        width: 150px;
+        height: 50px;
+        object-fit: cover;
+        object-position: center;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      h2.section-title {
+        font-size: 1.5em;
+        font-weight: 600;
+        margin: 0;
+        display: inline-block;
+        position: relative;
+      }
+
+      h2.section-title::after {
+        content: "";
+        display: block;
+        width: 40px;
+        height: 3px;
+        background-color: var(--accent-color);
+        margin-top: 3px;
+        border-radius: 2px;
+      }
+
+      .about-card {
+        background-color: var(--card-bg);
+        padding: 0.8em;
+        border-radius: 6px;
+        box-shadow: 0 3px 6px var(--shadow);
+        margin-bottom: 1em;
+      }
+
+      .about-card p {
+        margin: 0.4em 0;
+        font-size: 0.95em;
+      }
+
+      .project-header {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: baseline;
+        gap: 0.5em;
+        margin-bottom: 0.5em;
+      }
+
+      .project-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.25em;
+      }
+
+      .project-btn {
+        background: none;
+        border: none;
+        border-bottom: 2px solid var(--inactive-color);
+        color: var(--inactive-color);
+        padding: 0;
+        font-size: 1.5em;
+        font-weight: 500;
+        cursor: pointer;
+        transition: border-color 0.3s, color 0.3s, transform 0.3s;
+        transform-origin: bottom;
+      }
+
+      .project-btn:hover {
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color);
+      }
+
+      .project-btn.active {
+        color: var(--primary-color);
+        border-bottom-color: var(--accent-color);
+        transform: scale(1.1);
+      }
+
+      .separator {
+        color: var(--inactive-color);
+        font-size: 1.5em;
+      }
+
+      .featured-projects {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1em;
+        margin-bottom: 1em;
+      }
+
+      .featured-projects.hidden {
+        display: none !important;
+      }
+
+      @media (min-width: 768px) {
+        .featured-projects:not(.hidden) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .featured-projects:not(.hidden) .project[data-id="ev"] {
+          grid-column: 1 / -1;
+          justify-self: center;
+          max-width: 600px;
+        }
+      }
+
+      .project,
+      .selected-project {
+        background-color: var(--card-bg);
+        padding: 0.8em;
+        border-radius: 6px;
+        box-shadow: 0 3px 6px var(--shadow);
+      }
+
+      .project {
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.3s, opacity 0.3s;
+      }
+
+      .project:hover {
+        transform: scale(1.02);
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+      }
+
+      .selected-project {
+        margin: 1em 0;
+        display: none;
+      }
+
+      .project h3,
+      .selected-project h3 {
+        font-size: 1.1em;
+        font-weight: 600;
+        margin: 0 0 0.4em;
+        color: var(--primary-color);
+      }
+
+      .project p,
+      .selected-project p {
+        margin: 0.4em 0;
+        font-size: 0.95em;
+      }
+
+      .images-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1em;
+        margin: 0.4em 0;
+      }
+
+      .media-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background: var(--media-bg);
+      }
+
+      .media-wrapper video,
+      .media-wrapper img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        object-fit: contain;
+      }
+
+      .media-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .media-item .media-wrapper {
+        margin-bottom: 0.2em;
+      }
+
+      .media-description {
+        text-align: right;
+        margin: 0;
+        font-size: 0.8em;
+        color: var(--inactive-color);
+      }
+
+      .button {
+        display: inline-block;
+        padding: 0.4em 0.8em;
+        background: linear-gradient(135deg, var(--primary-color), #00bfff);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: 600;
+        box-shadow: 0 3px 4px var(--shadow);
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-size: 0.9em;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px var(--shadow);
+      }
+
+      footer {
+        text-align: center;
+        padding: 1em 0;
+        font-size: 0.85em;
+        color: #666;
+      }
+
+      .featured-projects .images-container {
+        display: none;
+      }
+
+      .selected-project .media-wrapper {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      .bigger_button {
+        font-size: 1.2em;
+        padding: 0.6em 1.2em;
+      }
+
+      .whitepaper-section {
+        width: min(90%, 700px);
+        aspect-ratio: 8.5 / 11;
+
+        background-color: #343434;
+        border-radius: 8px;
+        border: 2px solid #333333;
+        overflow: hidden;
+      }
+
+      .whitepaper {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <section id="about">
+        <video
+          class="logo-video"
+          autoplay
+          muted
+          playsinline
+          oncontextmenu="return false;"
+          src="assets/videos/logo.mp4"
+        ></video>
+        <h2 class="section-title">About Me</h2>
+        <div class="about-card">
+          <p>
+            Hello! I'm Theo Grigorenko, a high school student intereted in
+            numerical simulations and applied artificial intelligence
+            (especially with robotics).
+          </p>
+          <p>Please click on the projects below to learn more about them.</p>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="project-header">
+          <h2 id="projects-title" class="section-title">Projects:</h2>
+          <div class="project-buttons">
+            <button class="project-btn" data-id="satya">Satya</button
+            ><span class="separator">,</span>
+            <button class="project-btn" data-id="drone">Drone Tracking</button
+            ><span class="separator">,</span>
+            <button class="project-btn" data-id="ev">Electric Vehicle</button>
+          </div>
+        </div>
+
+        <div class="featured-projects">
+          <div class="project" data-id="satya">
+            <h3>Satya</h3>
+            <div class="media-item">
+              <div class="media-wrapper">
+                <video controls muted playsinline>
+                  <source
+                    src="assets/videos/satya-video.webm"
+                    type="video/webm"
+                  />
+                </video>
+              </div>
+              <p class="media-description">
+                Voting functionality on the Satya app
+              </p>
+            </div>
+            <p>
+              Satya is an <b>information consensus platform</b> for experts to
+              monetarily back or challenge statements.
+            </p>
+            <p>
+              Experts are able to build their expertise through voting which is
+              <b>optimally weighed</b> to maximize the accuracy of the
+              consensus.
+            </p>
+          </div>
+
+          <div class="project" data-id="drone">
+            <h3>Drone Tracking</h3>
+            <div class="media-item">
+              <div class="media-wrapper">
+                <video controls muted playsinline>
+                  <source
+                    src="assets/videos/drone-video.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <p class="media-description">Drone tracking demonstration</p>
+            </div>
+            <p>
+              Accurate drone tracking with a laser using custom-trained
+              <b>objection detection (yolov4)</b> and
+              <b>optimal control (kalman filter)</b>.
+            </p>
+          </div>
+
+          <div class="project" data-id="ev">
+            <h3>Electric Vehicle (SciOly Event)</h3>
+            <div class="media-item">
+              <div class="media-wrapper">
+                <video controls muted playsinline>
+                  <source src="assets/videos/ev-video.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <p class="media-description">New York States performance</p>
+            </div>
+            <p>
+              Science Olympiad event with the objective of a minuature electric
+              vehicle traveling a distance (8 meter to 10 meter) with the
+              <b>greatest accuracy and speed</b>.
+            </p>
+
+            <p>
+              I won a <b>silver medal</b> at the New York States competition
+              (2025) using with a <b>PID controller</b> to modulate the voltage
+              applied to the motor.
+            </p>
+          </div>
+        </div>
+
+        <div class="selected-project-container">
+          <div class="selected-project" data-id="satya">
+            <div class="media-item">
+              <div class="media-wrapper">
+                <video controls muted playsinline>
+                  <source
+                    src="assets/videos/satya-video.webm"
+                    type="video/webm"
+                  />
+                </video>
+              </div>
+              <p class="media-description">
+                Voting functionality on the Satya app
+              </p>
+            </div>
+
+            <div class="images-container">
+              <div class="media-item">
+                <div class="media-wrapper">
+                  <img
+                    src="assets/images/satya-image1.png"
+                    alt="Satya image 1"
+                  />
+                </div>
+                <p class="media-description">
+                  Resilience of estimation simulation
+                </p>
+              </div>
+              <div class="media-item">
+                <div class="media-wrapper">
+                  <img
+                    src="assets/images/satya-image2.png"
+                    alt="Satya image 2"
+                  />
+                </div>
+                <p class="media-description">
+                  Experience estimation simulation
+                </p>
+              </div>
+            </div>
+            <p>
+              Satya is an <b>information consensus platform</b> for experts to
+              monetarily back or challenge statements.
+            </p>
+            <p>
+              Experts are able to build their expertise through voting which is
+              <b>optimally weighed</b> to maximize the accuracy of the
+              consensus.
+            </p>
+            <p>
+              The charts / graphs above show a simulation of random truthfull
+              and malicious agents assigned an intelligence value. The agents
+              are then given statements to vote on and the simulation shows how
+              the estimation of agents' experience changes over time and
+              resilience of estimation.
+            </p>
+
+            <p>The app is avaliable on Windows and IOS.</p>
+            <div
+              style="
+                width: 100%;
+                margin-bottom: 1em;
+                display: flex;
+                justify-content: space-around;
+              "
+            >
+              <a
+                href="https://satya-website.vercel.app/"
+                target="_blank"
+                class="button bigger_button"
+                >Learn More on Satya's Website</a
+              >
+            </div>
+            <div
+              style="
+                width: 100%;
+                margin-bottom: 1em;
+                display: flex;
+                justify-content: space-around;
+              "
+            >
+              <div class="whitepaper-section appear" id="whitepaper-section">
+                <iframe
+                  src="assets/pdfs/whitepaper.pdf"
+                  frameborder="0"
+                  class="whitepaper"
+                  id="whitepaper"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+
+          <div class="selected-project" data-id="drone">
+            <div class="media-item">
+              <div class="media-wrapper">
+                <video controls muted playsinline>
+                  <source
+                    src="assets/videos/drone-video.mp4"
+                    type="video/mp4"
+                  />
+                </video>
+              </div>
+              <p class="media-description">Drone tracking demonstration</p>
+            </div>
+            <div class="images-container">
+              <div class="media-item">
+                <div class="media-wrapper">
+                  <img
+                    src="assets/images/drone-image1.png"
+                    alt="Drone Tracking image 1"
+                  />
+                </div>
+                <p class="media-description">Laser on drone</p>
+              </div>
+              <div class="media-item">
+                <div class="media-wrapper">
+                  <img
+                    src="assets/images/drone-image2.png"
+                    alt="Drone Tracking image 2"
+                  />
+                </div>
+                <p class="media-description">Drone tracking setup</p>
+              </div>
+            </div>
+            <p>This project accurately tracks a drone with a laser.</p>
+            <p>
+              It detects the drone from a <b>live video feed</b> from an iphone
+              using the <b>yolov4 model</b> which was trained on a self
+              collected and annotated dataset.
+            </p>
+            <p>
+              The camera distortion (pixel to motor angle) and laser position
+              (pixel offset depending on distance of the drone) are
+              <b>calibrated</b>.
+            </p>
+            <p>
+              Two stepper motors controlled with an <b>arduino</b> rotate the
+              camera and laser to track the position of the drone.
+            </p>
+            <p>
+              A <b>Kalman filter</b> is used to smooth the tracking and predict
+              the future position of the drone.
+            </p>
+          </div>
+
+          <div class="selected-project" data-id="ev">
+            <div class="media-item">
+              <div class="media-wrapper">
+                <video controls muted playsinline>
+                  <source src="assets/videos/ev-video.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <p class="media-description">New York States performance</p>
+            </div>
+            <div class="images-container">
+              <div class="media-item">
+                <div class="media-wrapper">
+                  <img
+                    src="assets/images/ev-image1.png"
+                    alt="Electric Vehicle image 1"
+                  />
+                </div>
+                <p class="media-description">Silver medal 🎉</p>
+              </div>
+              <div class="media-item">
+                <div class="media-wrapper">
+                  <img
+                    src="assets/images/ev-image2.png"
+                    alt="Electric Vehicle image 2"
+                  />
+                </div>
+                <p class="media-description">Simulation of optimal control</p>
+              </div>
+            </div>
+            <p>
+              Science Olympiad event with the objective of a minuature electric
+              vehicle traveling a distance (8 meter to 10 meter) with the
+              <b>greatest accuracy and speed</b>.
+            </p>
+
+            <p>
+              I won a <b>silver medal</b> at the New York States competition
+              (2025) using with a <b>PID controller</b> to modulate the voltage
+              applied to the motor.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>© 2025 Theo Grigorenko</footer>
+
+    <script>
+      // configure videos
+      document.querySelectorAll("video").forEach((v) => {
+        v.muted = true;
+        v.playsinline = true;
+        if (!v.classList.contains("logo-video")) v.controls = true;
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const featured = document.querySelector(".featured-projects");
+        const detailContainer = document.querySelector(
+          ".selected-project-container"
+        );
+        const buttons = document.querySelectorAll(".project-btn");
+        const featuredCards = featured.querySelectorAll(".project");
+        const title = document.getElementById("projects-title");
+        let currentId = null;
+
+        function clearSelection() {
+          document.querySelectorAll("video").forEach((v) => {
+            if (!v.classList.contains("logo-video")) v.pause();
+          });
+          detailContainer
+            .querySelectorAll(".selected-project")
+            .forEach((d) => (d.style.display = "none"));
+          buttons.forEach((b) => b.classList.remove("active"));
+          featured.classList.remove("hidden");
+          title.textContent = "Projects:";
+          currentId = null;
+        }
+
+        function selectProject(id) {
+          document.querySelectorAll("video").forEach((v) => {
+            if (!v.classList.contains("logo-video")) v.pause();
+          });
+          featured.classList.add("hidden");
+          if (currentId) {
+            detailContainer.querySelector(
+              `.selected-project[data-id="${currentId}"]`
+            ).style.display = "none";
+            document
+              .querySelector(`.project-btn[data-id="${currentId}"]`)
+              .classList.remove("active");
+          }
+          const detail = detailContainer.querySelector(
+            `.selected-project[data-id="${id}"]`
+          );
+          detail.style.display = "block";
+          const vid = detail.querySelector("video");
+          if (vid) vid.play();
+          document
+            .querySelector(`.project-btn[data-id="${id}"]`)
+            .classList.add("active");
+          currentId = id;
+          title.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        featuredCards.forEach((card) => {
+          const vid = card.querySelector("video");
+          card.addEventListener("mouseenter", () => {
+            if (vid.paused) vid.play();
+          });
+          card.addEventListener("mouseleave", () => {
+            if (card.dataset.id !== currentId) vid.pause();
+          });
+          card.addEventListener("click", (e) => {
+            const tag = e.target.tagName.toLowerCase();
+            if (tag === "a" || tag === "video" || e.target.closest("video"))
+              return;
+            selectProject(card.dataset.id);
+          });
+        });
+
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const id = btn.dataset.id;
+            if (id === currentId) clearSelection();
+            else selectProject(id);
+          });
+        });
+
+        title.addEventListener("click", () => {
+          if (currentId) clearSelection();
+        });
+      });
+    </script>
+  </body>
+</html>
