@@ -173,6 +173,17 @@ h2.section-title::after {
   color: var(--primary-color);
 }
 
+.about-card h4 {
+  font-size: 1em;
+  font-weight: 600;
+  margin: 1em 0 0.4em;
+  color: var(--primary-color);
+}
+
+.about-card h4:first-of-type {
+  margin-top: 0;
+}
+
 .project p,
 .selected-project p {
   margin: 0.4em 0;
