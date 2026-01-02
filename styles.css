@@ -1,0 +1,454 @@
+:root {
+  --primary-color: #0066cc;
+  --background-color: #fefefe;
+  --card-bg: #ffffff;
+  --text-color: #333;
+  --inactive-color: #888;
+  --accent-color: #0066cc;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --media-bg: #f5f5f5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Inter", sans-serif;
+  line-height: 1.4;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0.5em auto;
+  padding: 0 1em;
+}
+
+section + section {
+  margin-top: 1em;
+}
+
+#about {
+  position: relative;
+}
+
+.logo-video {
+  position: absolute;
+  top: 0;
+  right: -20px;
+  width: 150px;
+  height: 50px;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+h2.section-title {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 0;
+  display: inline-block;
+  position: relative;
+}
+
+h2.section-title::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  background-color: var(--accent-color);
+  margin-top: 3px;
+  border-radius: 2px;
+}
+
+.about-card {
+  background-color: var(--card-bg);
+  padding: 0.8em;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px var(--shadow);
+  margin-bottom: 1em;
+}
+
+.about-card p {
+  margin: 0.4em 0;
+  font-size: 0.95em;
+}
+
+.project-header {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.project-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.project-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--inactive-color);
+  color: var(--inactive-color);
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.3s, color 0.3s, transform 0.3s;
+  transform-origin: bottom;
+}
+
+.project-btn:hover {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.project-btn.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.separator {
+  color: var(--inactive-color);
+  font-size: 1.5em;
+}
+
+.featured-projects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.featured-projects.hidden {
+  display: none !important;
+}
+
+@media (min-width: 768px) {
+  .featured-projects:not(.hidden) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project,
+.selected-project {
+  background-color: var(--card-bg);
+  padding: 0.8em;
+  border-radius: 6px;
+  box-shadow: 0 3px 6px var(--shadow);
+}
+
+.project {
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s, opacity 0.3s;
+}
+
+.project:hover {
+  transform: scale(1.02);
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.selected-project {
+  margin: 1em 0;
+  display: none;
+}
+
+.project h3,
+.selected-project h3 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 0 0 0.4em;
+  color: var(--primary-color);
+}
+
+.project p,
+.selected-project p {
+  margin: 0.4em 0;
+  font-size: 0.95em;
+}
+
+.images-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1em;
+  margin: 0.4em 0;
+}
+
+/* Drone videos layout */
+.drone-videos-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+@media (min-width: 768px) {
+  .drone-videos-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1em;
+    align-items: start;
+  }
+}
+
+.right-videos {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.drone-videos-layout .media-item {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.drone-videos-layout .media-item:hover {
+  transform: scale(1.02);
+}
+
+.drone-videos-layout .media-item .media-wrapper {
+  border-radius: 6px;
+  transition: outline 0.3s;
+  overflow: hidden;
+}
+
+.drone-videos-layout .media-item:hover .media-wrapper {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 0px;
+}
+
+/* Drone designs carousel */
+.drone-designs-container {
+  margin: 1em 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.drone-designs-swiper {
+  width: 100%;
+  padding-bottom: 2.5em;
+}
+
+.drone-designs-swiper .swiper-wrapper {
+  align-items: center;
+}
+
+.drone-designs-swiper .swiper-slide {
+  height: auto;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.drone-designs-swiper .swiper-pagination {
+  bottom: 0;
+}
+
+.drone-designs-swiper .swiper-pagination-bullet {
+  background: var(--primary-color);
+  opacity: 0.3;
+}
+
+.drone-designs-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.drone-designs-swiper .swiper-button-prev,
+.drone-designs-swiper .swiper-button-next {
+  color: var(--primary-color);
+  width: 35px;
+  height: 35px;
+  background: var(--card-bg);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.drone-designs-swiper .swiper-button-prev:after,
+.drone-designs-swiper .swiper-button-next:after {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .drone-designs-container {
+    overflow: visible;
+  }
+
+  .drone-designs-swiper {
+    padding-bottom: 0;
+  }
+
+  .drone-designs-swiper .swiper-button-prev,
+  .drone-designs-swiper .swiper-button-next {
+    display: none;
+  }
+}
+
+.media-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--media-bg);
+}
+
+.video-wrapper {
+  aspect-ratio: 16 / 9;
+}
+
+.video-wrapper-vertical {
+  aspect-ratio: 9 / 16 !important;
+  max-height: 700px;
+}
+
+@media (min-width: 1024px) {
+  .video-wrapper-vertical {
+    max-height: 800px;
+  }
+}
+
+.design-wrapper {
+  aspect-ratio: auto;
+  height: auto;
+  min-height: 150px;
+  position: relative;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.design-wrapper img {
+  position: relative;
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  transform: none;
+  top: auto;
+  left: auto;
+}
+
+.media-wrapper video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+}
+
+.media-wrapper img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+}
+
+.design-wrapper img {
+  position: relative !important;
+  transform: none !important;
+  top: auto !important;
+  left: auto !important;
+}
+
+.media-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.media-item .media-wrapper {
+  margin-bottom: 0.2em;
+}
+
+.media-description {
+  text-align: right;
+  margin: 0;
+  font-size: 0.8em;
+  color: var(--inactive-color);
+}
+
+.button {
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  background: linear-gradient(135deg, var(--primary-color), #00bfff);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 600;
+  box-shadow: 0 3px 4px var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-size: 0.9em;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px var(--shadow);
+}
+
+footer {
+  text-align: center;
+  padding: 1em 0;
+  font-size: 0.85em;
+  color: #666;
+}
+
+.featured-projects .images-container {
+  display: none;
+}
+
+.selected-project .media-wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.bigger_button {
+  font-size: 1.2em;
+  padding: 0.6em 1.2em;
+}
+
+.whitepaper-section {
+  width: min(90%, 700px);
+  aspect-ratio: 8.5 / 11;
+  background-color: #343434;
+  border-radius: 8px;
+  border: 2px solid #333333;
+  overflow: hidden;
+}
+
+.whitepaper {
+  width: 100%;
+  height: 100%;
+}
+
+/* Video showcase section styles */
+#video-showcase .about-card {
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  #video-showcase .about-card {
+    margin-left: -0.5em;
+    margin-right: -0.5em;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+  }
+}
+
+.version-4 .video-wrapper-vertical {
+  width: 100%;
+  height: auto;
+}

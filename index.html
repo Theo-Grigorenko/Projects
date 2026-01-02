@@ -9,288 +9,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        --primary-color: #0066cc;
-        --background-color: #fefefe;
-        --card-bg: #ffffff;
-        --text-color: #333;
-        --inactive-color: #888;
-        --accent-color: #0066cc;
-        --shadow: rgba(0, 0, 0, 0.05);
-        --media-bg: #f5f5f5;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: var(--background-color);
-        color: var(--text-color);
-        font-family: "Inter", sans-serif;
-        line-height: 1.4;
-        scroll-behavior: smooth;
-      }
-
-      .container {
-        max-width: 1000px;
-        margin: 0.5em auto;
-        padding: 0 0.5em;
-      }
-
-      section + section {
-        margin-top: 1em;
-      }
-
-      #about {
-        position: relative;
-      }
-
-      .logo-video {
-        position: absolute;
-        top: 0;
-        right: -20px;
-        width: 150px;
-        height: 50px;
-        object-fit: cover;
-        object-position: center;
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      h2.section-title {
-        font-size: 1.5em;
-        font-weight: 600;
-        margin: 0;
-        display: inline-block;
-        position: relative;
-      }
-
-      h2.section-title::after {
-        content: "";
-        display: block;
-        width: 40px;
-        height: 3px;
-        background-color: var(--accent-color);
-        margin-top: 3px;
-        border-radius: 2px;
-      }
-
-      .about-card {
-        background-color: var(--card-bg);
-        padding: 0.8em;
-        border-radius: 6px;
-        box-shadow: 0 3px 6px var(--shadow);
-        margin-bottom: 1em;
-      }
-
-      .about-card p {
-        margin: 0.4em 0;
-        font-size: 0.95em;
-      }
-
-      .project-header {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        align-items: baseline;
-        gap: 0.5em;
-        margin-bottom: 0.5em;
-      }
-
-      .project-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.25em;
-      }
-
-      .project-btn {
-        background: none;
-        border: none;
-        border-bottom: 2px solid var(--inactive-color);
-        color: var(--inactive-color);
-        padding: 0;
-        font-size: 1.5em;
-        font-weight: 500;
-        cursor: pointer;
-        transition: border-color 0.3s, color 0.3s, transform 0.3s;
-        transform-origin: bottom;
-      }
-
-      .project-btn:hover {
-        color: var(--primary-color);
-        border-bottom-color: var(--primary-color);
-      }
-
-      .project-btn.active {
-        color: var(--primary-color);
-        border-bottom-color: var(--accent-color);
-        transform: scale(1.1);
-      }
-
-      .separator {
-        color: var(--inactive-color);
-        font-size: 1.5em;
-      }
-
-      .featured-projects {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1em;
-        margin-bottom: 1em;
-      }
-
-      .featured-projects.hidden {
-        display: none !important;
-      }
-
-      @media (min-width: 768px) {
-        .featured-projects:not(.hidden) {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .featured-projects:not(.hidden) .project[data-id="ev"] {
-          grid-column: 1 / -1;
-          justify-self: center;
-          max-width: 600px;
-        }
-      }
-
-      .project,
-      .selected-project {
-        background-color: var(--card-bg);
-        padding: 0.8em;
-        border-radius: 6px;
-        box-shadow: 0 3px 6px var(--shadow);
-      }
-
-      .project {
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.3s, opacity 0.3s;
-      }
-
-      .project:hover {
-        transform: scale(1.02);
-        outline: 2px solid var(--primary-color);
-        outline-offset: 2px;
-      }
-
-      .selected-project {
-        margin: 1em 0;
-        display: none;
-      }
-
-      .project h3,
-      .selected-project h3 {
-        font-size: 1.1em;
-        font-weight: 600;
-        margin: 0 0 0.4em;
-        color: var(--primary-color);
-      }
-
-      .project p,
-      .selected-project p {
-        margin: 0.4em 0;
-        font-size: 0.95em;
-      }
-
-      .images-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 1em;
-        margin: 0.4em 0;
-      }
-
-      .media-wrapper {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16 / 9;
-        background: var(--media-bg);
-      }
-
-      .media-wrapper video,
-      .media-wrapper img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%);
-        object-fit: contain;
-      }
-
-      .media-item {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .media-item .media-wrapper {
-        margin-bottom: 0.2em;
-      }
-
-      .media-description {
-        text-align: right;
-        margin: 0;
-        font-size: 0.8em;
-        color: var(--inactive-color);
-      }
-
-      .button {
-        display: inline-block;
-        padding: 0.4em 0.8em;
-        background: linear-gradient(135deg, var(--primary-color), #00bfff);
-        color: #fff;
-        text-decoration: none;
-        border-radius: 4px;
-        font-weight: 600;
-        box-shadow: 0 3px 4px var(--shadow);
-        transition: transform 0.2s, box-shadow 0.2s;
-        font-size: 0.9em;
-      }
-
-      .button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 4px 6px var(--shadow);
-      }
-
-      footer {
-        text-align: center;
-        padding: 1em 0;
-        font-size: 0.85em;
-        color: #666;
-      }
-
-      .featured-projects .images-container {
-        display: none;
-      }
-
-      .selected-project .media-wrapper {
-        width: 90%;
-        margin: 0 auto;
-      }
-
-      .bigger_button {
-        font-size: 1.2em;
-        padding: 0.6em 1.2em;
-      }
-
-      .whitepaper-section {
-        width: min(90%, 700px);
-        aspect-ratio: 8.5 / 11;
-        background-color: #343434;
-        border-radius: 8px;
-        border: 2px solid #333333;
-        overflow: hidden;
-      }
-
-      .whitepaper {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
@@ -311,7 +31,125 @@
             numerical simulations and applied artificial intelligence
             (especially with robotics).
           </p>
-          <p>Please click on the projects below to learn more about them.</p>
+          <p>
+            Please scroll to see the projects below and learn more about them.
+          </p>
+        </div>
+      </section>
+
+      <section id="video-showcase">
+        <h2 class="section-title">Robotics Project</h2>
+        <div class="about-card">
+          <div class="drone-videos-layout">
+            <div class="media-item version-4">
+              <div class="media-wrapper video-wrapper-vertical">
+                <video
+                  controls
+                  muted
+                  playsinline
+                  preload="none"
+                  data-src="assets/videos/Version4.webm"
+                ></video>
+              </div>
+              <p class="media-description">Latest version</p>
+            </div>
+
+            <div class="right-videos">
+              <div class="media-item">
+                <div class="media-wrapper video-wrapper">
+                  <video
+                    controls
+                    muted
+                    playsinline
+                    preload="none"
+                    data-src="assets/videos/Version3.webm"
+                  ></video>
+                </div>
+              </div>
+              <div class="media-item">
+                <div class="media-wrapper video-wrapper">
+                  <video
+                    controls
+                    muted
+                    playsinline
+                    preload="none"
+                    data-src="assets/videos/Version2.webm"
+                  ></video>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="drone-designs-container">
+            <div class="swiper drone-designs-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" data-design="1">
+                  <div class="media-item">
+                    <div class="media-wrapper design-wrapper">
+                      <img
+                        data-src="assets/images/Design1.png"
+                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                        alt="Design 1"
+                      />
+                    </div>
+                    <p class="media-description">Design 1</p>
+                  </div>
+                </div>
+                <div class="swiper-slide" data-design="2">
+                  <div class="media-item">
+                    <div class="media-wrapper design-wrapper">
+                      <img
+                        data-src="assets/images/Design2.png"
+                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                        alt="Design 2"
+                      />
+                    </div>
+                    <p class="media-description">Design 2</p>
+                  </div>
+                </div>
+                <div class="swiper-slide" data-design="3">
+                  <div class="media-item">
+                    <div class="media-wrapper design-wrapper">
+                      <img
+                        data-src="assets/images/Design3.png"
+                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                        alt="Design 3"
+                      />
+                    </div>
+                    <p class="media-description">Design 3</p>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-pagination"></div>
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
+          </div>
+
+          <p>
+            Accurate drone tracking with a laser using custom-trained
+            <b>object detection (YOLOv4)</b> and
+            <b>optimal control (Kalman filter)</b>.
+          </p>
+          <p>This project accurately tracks a drone with a laser.</p>
+          <p>
+            It detects the drone from a <b>live video feed</b> from an iPhone
+            using the <b>YOLOv4 model</b> which was trained on a self-collected
+            and annotated dataset.
+          </p>
+          <p>
+            The camera distortion (pixel to motor angle) and laser position
+            (pixel offset depending on distance of the drone) are
+            <b>calibrated</b>.
+          </p>
+          <p>
+            Two stepper motors controlled with an <b>Arduino</b> rotate the
+            camera and laser to track the position of the drone.
+          </p>
+          <p>
+            A <b>Kalman filter</b> is used to smooth the tracking and predict
+            the future position of the drone.
+          </p>
         </div>
       </section>
 
@@ -320,8 +158,6 @@
           <h2 id="projects-title" class="section-title">Projects:</h2>
           <div class="project-buttons">
             <button class="project-btn" data-id="satya">Satya</button
-            ><span class="separator">,</span>
-            <button class="project-btn" data-id="drone">Drone Tracking</button
             ><span class="separator">,</span>
             <button class="project-btn" data-id="ev">Electric Vehicle</button>
           </div>
@@ -352,27 +188,6 @@
               Experts are able to build their expertise through voting which is
               <b>optimally weighed</b> to maximize the accuracy of the
               consensus.
-            </p>
-          </div>
-
-          <div class="project" data-id="drone">
-            <h3>Drone Tracking</h3>
-            <div class="media-item">
-              <div class="media-wrapper">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/drone-video.webm"
-                ></video>
-              </div>
-              <p class="media-description">Drone tracking demonstration</p>
-            </div>
-            <p>
-              Accurate drone tracking with a laser using custom-trained
-              <b>object detection (YOLOv4)</b> and
-              <b>optimal control (Kalman filter)</b>.
             </p>
           </div>
 
@@ -499,63 +314,6 @@
             </div>
           </div>
 
-          <!-- Drone -->
-          <div class="selected-project" data-id="drone">
-            <div class="media-item">
-              <div class="media-wrapper">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/drone-video.webm"
-                ></video>
-              </div>
-              <p class="media-description">Drone tracking demonstration</p>
-            </div>
-            <div class="images-container">
-              <div class="media-item">
-                <div class="media-wrapper">
-                  <img
-                    data-src="assets/images/drone-image1.webp"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                    alt="Drone Tracking image 1"
-                  />
-                </div>
-                <p class="media-description">Laser on drone</p>
-              </div>
-              <div class="media-item">
-                <div class="media-wrapper">
-                  <img
-                    data-src="assets/images/drone-image2.webp"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                    alt="Drone Tracking image 2"
-                  />
-                </div>
-                <p class="media-description">Drone tracking setup</p>
-              </div>
-            </div>
-            <p>This project accurately tracks a drone with a laser.</p>
-            <p>
-              It detects the drone from a <b>live video feed</b> from an iPhone
-              using the <b>YOLOv4 model</b> which was trained on a
-              self-collected and annotated dataset.
-            </p>
-            <p>
-              The camera distortion (pixel to motor angle) and laser position
-              (pixel offset depending on distance of the drone) are
-              <b>calibrated</b>.
-            </p>
-            <p>
-              Two stepper motors controlled with an <b>Arduino</b> rotate the
-              camera and laser to track the position of the drone.
-            </p>
-            <p>
-              A <b>Kalman filter</b> is used to smooth the tracking and predict
-              the future position of the drone.
-            </p>
-          </div>
-
           <!-- EV -->
           <div class="selected-project" data-id="ev">
             <div class="media-item">
@@ -661,7 +419,7 @@
           }
         }
 
-        /* 1b — Cover posters for the three hero videos (Satya / Drone / EV) */
+        /* 1b — Cover posters for the hero videos */
         const heroVids = Array.from(
           document.querySelectorAll(
             'video[data-src*="satya-video"],video[data-src*="drone-video"],video[data-src*="ev-video"]'
@@ -787,9 +545,21 @@
 
         featuredCards.forEach((card) => {
           const vid = card.querySelector("video");
-          card.addEventListener("mouseenter", () => vid.paused && vid.play());
-          card.addEventListener("mouseleave", () => {
-            if (card.dataset.id !== currentId) vid.pause();
+          card.addEventListener("mouseenter", () => {
+            // Pause all other featured videos
+            featuredCards.forEach((otherCard) => {
+              if (otherCard !== card) {
+                const otherVid = otherCard.querySelector("video");
+                if (otherVid) otherVid.pause();
+              }
+            });
+            // Pause all drone tracking videos
+            const droneVideos = document.querySelectorAll('.drone-videos-layout .media-item video');
+            droneVideos.forEach((droneVid) => {
+              if (droneVid) droneVid.pause();
+            });
+            // Play this video
+            if (vid.paused && vid.src) vid.play();
           });
           card.addEventListener("click", (e) => {
             if (
@@ -810,6 +580,128 @@
         );
 
         title.addEventListener("click", () => currentId && clearSelection());
+
+        /* ─── DRONE TRACKING VIDEO HOVER INTERACTIVITY ─── */
+        const droneVideos = document.querySelectorAll('.drone-videos-layout .media-item');
+        droneVideos.forEach((item) => {
+          const vid = item.querySelector('video');
+          if (vid) {
+            item.addEventListener('mouseenter', () => {
+              // Pause all other drone videos
+              droneVideos.forEach((otherItem) => {
+                if (otherItem !== item) {
+                  const otherVid = otherItem.querySelector('video');
+                  if (otherVid) otherVid.pause();
+                }
+              });
+              // Pause all featured project videos
+              featuredCards.forEach((card) => {
+                const otherVid = card.querySelector("video");
+                if (otherVid) otherVid.pause();
+              });
+              // Play this video
+              if (vid.paused && vid.src) vid.play();
+            });
+          }
+        });
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      /* ─── SWIPER CAROUSEL INITIALIZATION ─── */
+      document.addEventListener("DOMContentLoaded", () => {
+        const swiper = new Swiper('.drone-designs-swiper', {
+          effect: 'slide',
+          slidesPerView: 1.3,
+          spaceBetween: 20,
+          centeredSlides: true,
+          loop: false,
+          watchSlidesProgress: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+            type: 'bullets',
+            renderBullet: function (index, className) {
+              // Only render 3 bullets (for the 3 unique designs)
+              if (index < 3) {
+                return '<span class="' + className + '" data-index="' + index + '"></span>';
+              }
+              return '';
+            },
+          },
+          navigation: {
+            nextEl: '.drone-designs-swiper .swiper-button-next',
+            prevEl: '.drone-designs-swiper .swiper-button-prev',
+          },
+          breakpoints: {
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 16,
+              centeredSlides: false,
+              loop: false,
+              pagination: false,
+              navigation: false,
+            }
+          },
+          on: {
+            init: function() {
+              updateSlideScale(this);
+              updatePagination(this);
+            },
+            slideChange: function() {
+              updateSlideScale(this);
+              updatePagination(this);
+            },
+            transitionEnd: function() {
+              updateSlideScale(this);
+              updatePagination(this);
+            },
+          }
+        });
+
+        function updatePagination(swiper) {
+          const paginationEl = document.querySelector('.drone-designs-swiper .swiper-pagination');
+          if (window.innerWidth < 768) {
+            if (paginationEl) paginationEl.style.display = 'block';
+            const activeSlide = swiper.slides[swiper.activeIndex];
+            const designIndex = parseInt(activeSlide.getAttribute('data-design')) - 1;
+            const bullets = document.querySelectorAll('.drone-designs-swiper .swiper-pagination-bullet');
+            bullets.forEach((bullet, index) => {
+              if (index === designIndex) {
+                bullet.classList.add('swiper-pagination-bullet-active');
+              } else {
+                bullet.classList.remove('swiper-pagination-bullet-active');
+              }
+            });
+          } else {
+            if (paginationEl) paginationEl.style.display = 'none';
+          }
+        }
+
+        function updateSlideScale(swiper) {
+          if (window.innerWidth < 768) {
+            swiper.slides.forEach((slide) => {
+              slide.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+              if (slide.classList.contains('swiper-slide-active')) {
+                slide.style.transform = 'scale(1)';
+                slide.style.opacity = '1';
+              } else {
+                slide.style.transform = 'scale(0.85)';
+                slide.style.opacity = '0.6';
+              }
+            });
+          } else {
+            swiper.slides.forEach((slide) => {
+              slide.style.transform = '';
+              slide.style.opacity = '';
+            });
+          }
+        }
+
+        window.addEventListener('resize', () => {
+          updateSlideScale(swiper);
+          updatePagination(swiper);
+        });
       });
     </script>
   </body>
