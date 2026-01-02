@@ -289,7 +289,8 @@ h2.section-title::after {
   }
 
   .drone-designs-swiper .swiper-button-prev,
-  .drone-designs-swiper .swiper-button-next {
+  .drone-designs-swiper .swiper-button-next,
+  .drone-designs-swiper .swiper-pagination {
     display: none;
   }
 }

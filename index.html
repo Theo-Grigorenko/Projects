@@ -639,8 +639,6 @@
               spaceBetween: 16,
               centeredSlides: false,
               loop: false,
-              pagination: false,
-              navigation: false,
             }
           },
           on: {
@@ -699,6 +697,7 @@
         }
 
         window.addEventListener('resize', () => {
+          swiper.update();
           updateSlideScale(swiper);
           updatePagination(swiper);
         });
