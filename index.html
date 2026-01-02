@@ -9,7 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
 
@@ -92,7 +95,6 @@
                         alt="Design 1"
                       />
                     </div>
-                    <p class="media-description">Design 1</p>
                   </div>
                 </div>
                 <div class="swiper-slide" data-design="2">
@@ -104,7 +106,6 @@
                         alt="Design 2"
                       />
                     </div>
-                    <p class="media-description">Design 2</p>
                   </div>
                 </div>
                 <div class="swiper-slide" data-design="3">
@@ -116,7 +117,6 @@
                         alt="Design 3"
                       />
                     </div>
-                    <p class="media-description">Design 3</p>
                   </div>
                 </div>
               </div>
@@ -126,36 +126,46 @@
             </div>
           </div>
 
-          <p>
-            Accurate drone tracking with a laser using custom-trained
-            <b>object detection (YOLOv4)</b> and
+          <!-- <p>
+            Accurate drone tracking using
+            <b>custom-trained object detection</b> and
             <b>optimal control (Kalman filter)</b>.
-          </p>
-          <p>This project accurately tracks a drone with a laser.</p>
+          </p> -->
           <p>
-            It detects the drone from a <b>live video feed</b> from an iPhone
-            using the <b>YOLOv4 model</b> which was trained on a self-collected
-            and annotated dataset.
-          </p>
-          <p>
-            The camera distortion (pixel to motor angle) and laser position
-            (pixel offset depending on distance of the drone) are
-            <b>calibrated</b>.
+            The latest version turns an
+            <u><b>unloaded paintball (toy) gun</b></u> using powerful stepper
+            motors with timing pulleys for improved precision. The frame is
+            built from <b>cut aluminum sheets</b>, drilled and tapped holes,
+            connected with bolts.
           </p>
           <p>
-            Two stepper motors controlled with an <b>Arduino</b> rotate the
-            camera and laser to track the position of the drone.
+            It detects the drone from a <b>live video feed</b> from an iPhone.
+            The first version used <b>YOLOv4</b>, while later versions use
+            <b>D-Fine</b> for improved detection of small drones. Both models
+            were trained on a <b>self-collected and annotated dataset</b>. A
+            <b>custom iPhone app</b> streams the video to the laptop for
+            processing.
           </p>
           <p>
-            A <b>Kalman filter</b> is used to smooth the tracking and predict
-            the future position of the drone.
+            <b>Stepper motors</b> controlled by an <b>Arduino Mega</b> rotate to
+            track the drone's position. A <b>Kalman filter</b> smooths the
+            tracking and predicts the drone's future position.
+          </p>
+          <p>
+            In one version,
+            <b>second webcam is used for distance estimation</b> and a
+            mirror-reflected laser for a compact design.
+          </p>
+          <p>
+            The <b>3D designs</b> shown above were modeled and
+            <b>3D printed</b> for the tracking platform.
           </p>
         </div>
       </section>
 
       <section id="projects">
         <div class="project-header">
-          <h2 id="projects-title" class="section-title">Projects:</h2>
+          <h2 id="projects-title" class="section-title">Other Projects:</h2>
           <div class="project-buttons">
             <button class="project-btn" data-id="satya">Satya</button
             ><span class="separator">,</span>
@@ -464,13 +474,11 @@
         await Promise.all(heroVids.map(loadPoster));
 
         /* 4 — Remaining inline <img> elements */
-        document
-          .querySelectorAll("img[data-src]")
-          .forEach((img) => {
-            if (!img.src || img.src.includes("base64")) {
-              img.src = img.dataset.src;
-            }
-          });
+        document.querySelectorAll("img[data-src]").forEach((img) => {
+          if (!img.src || img.src.includes("base64")) {
+            img.src = img.dataset.src;
+          }
+        });
 
         /* 5 — Posters for any remaining videos */
         const allVideos = Array.from(
@@ -532,7 +540,7 @@
             .forEach((d) => (d.style.display = "none"));
           buttons.forEach((b) => b.classList.remove("active"));
           featured.classList.remove("hidden");
-          title.textContent = "Projects:";
+          title.textContent = "Other Projects:";
           currentId = null;
         }
 
@@ -574,7 +582,9 @@
               }
             });
             // Pause all drone tracking videos
-            const droneVideos = document.querySelectorAll('.drone-videos-layout .media-item video');
+            const droneVideos = document.querySelectorAll(
+              ".drone-videos-layout .media-item video"
+            );
             droneVideos.forEach((droneVid) => {
               if (droneVid) droneVid.pause();
             });
@@ -602,15 +612,17 @@
         title.addEventListener("click", () => currentId && clearSelection());
 
         /* ─── DRONE TRACKING VIDEO HOVER INTERACTIVITY ─── */
-        const droneVideos = document.querySelectorAll('.drone-videos-layout .media-item');
+        const droneVideos = document.querySelectorAll(
+          ".drone-videos-layout .media-item"
+        );
         droneVideos.forEach((item) => {
-          const vid = item.querySelector('video');
+          const vid = item.querySelector("video");
           if (vid) {
-            item.addEventListener('mouseenter', () => {
+            item.addEventListener("mouseenter", () => {
               // Pause all other drone videos
               droneVideos.forEach((otherItem) => {
                 if (otherItem !== item) {
-                  const otherVid = otherItem.querySelector('video');
+                  const otherVid = otherItem.querySelector("video");
                   if (otherVid) otherVid.pause();
                 }
               });
@@ -630,28 +642,34 @@
     <script>
       /* ─── SWIPER CAROUSEL INITIALIZATION ─── */
       document.addEventListener("DOMContentLoaded", () => {
-        const swiper = new Swiper('.drone-designs-swiper', {
-          effect: 'slide',
+        const swiper = new Swiper(".drone-designs-swiper", {
+          effect: "slide",
           slidesPerView: 1.3,
           spaceBetween: 20,
           centeredSlides: true,
           loop: false,
           watchSlidesProgress: true,
           pagination: {
-            el: '.swiper-pagination',
+            el: ".swiper-pagination",
             clickable: true,
-            type: 'bullets',
+            type: "bullets",
             renderBullet: function (index, className) {
               // Only render 3 bullets (for the 3 unique designs)
               if (index < 3) {
-                return '<span class="' + className + '" data-index="' + index + '"></span>';
+                return (
+                  '<span class="' +
+                  className +
+                  '" data-index="' +
+                  index +
+                  '"></span>'
+                );
               }
-              return '';
+              return "";
             },
           },
           navigation: {
-            nextEl: '.drone-designs-swiper .swiper-button-next',
-            prevEl: '.drone-designs-swiper .swiper-button-prev',
+            nextEl: ".drone-designs-swiper .swiper-button-next",
+            prevEl: ".drone-designs-swiper .swiper-button-prev",
           },
           breakpoints: {
             768: {
@@ -659,64 +677,69 @@
               spaceBetween: 16,
               centeredSlides: false,
               loop: false,
-            }
+            },
           },
           on: {
-            init: function() {
+            init: function () {
               updateSlideScale(this);
               updatePagination(this);
             },
-            slideChange: function() {
+            slideChange: function () {
               updateSlideScale(this);
               updatePagination(this);
             },
-            transitionEnd: function() {
+            transitionEnd: function () {
               updateSlideScale(this);
               updatePagination(this);
             },
-          }
+          },
         });
 
         function updatePagination(swiper) {
-          const paginationEl = document.querySelector('.drone-designs-swiper .swiper-pagination');
+          const paginationEl = document.querySelector(
+            ".drone-designs-swiper .swiper-pagination"
+          );
           if (window.innerWidth < 768) {
-            if (paginationEl) paginationEl.style.display = 'block';
+            if (paginationEl) paginationEl.style.display = "block";
             const activeSlide = swiper.slides[swiper.activeIndex];
-            const designIndex = parseInt(activeSlide.getAttribute('data-design')) - 1;
-            const bullets = document.querySelectorAll('.drone-designs-swiper .swiper-pagination-bullet');
+            const designIndex =
+              parseInt(activeSlide.getAttribute("data-design")) - 1;
+            const bullets = document.querySelectorAll(
+              ".drone-designs-swiper .swiper-pagination-bullet"
+            );
             bullets.forEach((bullet, index) => {
               if (index === designIndex) {
-                bullet.classList.add('swiper-pagination-bullet-active');
+                bullet.classList.add("swiper-pagination-bullet-active");
               } else {
-                bullet.classList.remove('swiper-pagination-bullet-active');
+                bullet.classList.remove("swiper-pagination-bullet-active");
               }
             });
           } else {
-            if (paginationEl) paginationEl.style.display = 'none';
+            if (paginationEl) paginationEl.style.display = "none";
           }
         }
 
         function updateSlideScale(swiper) {
           if (window.innerWidth < 768) {
             swiper.slides.forEach((slide) => {
-              slide.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-              if (slide.classList.contains('swiper-slide-active')) {
-                slide.style.transform = 'scale(1)';
-                slide.style.opacity = '1';
+              slide.style.transition = "transform 0.3s ease, opacity 0.3s ease";
+              if (slide.classList.contains("swiper-slide-active")) {
+                slide.style.transform = "scale(1)";
+                slide.style.opacity = "1";
               } else {
-                slide.style.transform = 'scale(0.85)';
-                slide.style.opacity = '0.6';
+                slide.style.transform = "scale(0.85)";
+                slide.style.opacity = "0.6";
               }
             });
           } else {
             swiper.slides.forEach((slide) => {
-              slide.style.transform = '';
-              slide.style.opacity = '';
+              slide.style.transform = "";
+              slide.style.opacity = "";
             });
           }
         }
 
-        window.addEventListener('resize', () => {
+        window.addEventListener("resize", () => {
           swiper.update();
           updateSlideScale(swiper);
           updatePagination(swiper);
