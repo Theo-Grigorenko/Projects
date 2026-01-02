@@ -419,50 +419,70 @@
           }
         }
 
-        /* 1b — Cover posters for the hero videos */
+        /* 1b — Version video posters in order: 4, 3, 2 */
+        const loadPoster = (video) => {
+          const poster = video.dataset.src.replace(/\.\w+$/, ".webp");
+          video.poster = poster;
+          return new Promise((res) => {
+            const img = new Image();
+            img.onload = img.onerror = res;
+            img.src = poster;
+          });
+        };
+
+        const version4 = document.querySelector('video[data-src*="Version4"]');
+        const version3 = document.querySelector('video[data-src*="Version3"]');
+        const version2 = document.querySelector('video[data-src*="Version2"]');
+
+        if (version4) await loadPoster(version4);
+        if (version3) await loadPoster(version3);
+        if (version2) await loadPoster(version2);
+
+        /* 2 — Design images in order: 1, 2, 3 */
+        const loadImage = (img) => {
+          return new Promise((res) => {
+            img.onload = img.onerror = res;
+            img.src = img.dataset.src;
+          });
+        };
+
+        const design1 = document.querySelector('img[data-src*="Design1"]');
+        const design2 = document.querySelector('img[data-src*="Design2"]');
+        const design3 = document.querySelector('img[data-src*="Design3"]');
+
+        if (design1) await loadImage(design1);
+        if (design2) await loadImage(design2);
+        if (design3) await loadImage(design3);
+
+        /* 3 — Hero video posters (satya, drone, ev) */
         const heroVids = Array.from(
           document.querySelectorAll(
             'video[data-src*="satya-video"],video[data-src*="drone-video"],video[data-src*="ev-video"]'
           )
         );
 
-        const posterPromises = heroVids.map((v) => {
-          const poster = v.dataset.src.replace(/\.\w+$/, ".webp");
-          v.poster = poster; // show cover
-          return new Promise((res) => {
-            const img = new Image();
-            img.onload = img.onerror = res; // resolve either way → unblock
-            img.src = poster; // triggers network fetch
-          });
-        });
+        await Promise.all(heroVids.map(loadPoster));
 
-        /* WAIT until ALL three covers have downloaded (and painted) */
-        await Promise.all(posterPromises);
-
-        /* 2 — Inline <img> elements */
+        /* 4 — Remaining inline <img> elements */
         document
           .querySelectorAll("img[data-src]")
-          .forEach((img) => (img.src = img.dataset.src));
+          .forEach((img) => {
+            if (!img.src || img.src.includes("base64")) {
+              img.src = img.dataset.src;
+            }
+          });
 
-        /* 3 — Posters for every other video (if any) */
+        /* 5 — Posters for any remaining videos */
         const allVideos = Array.from(
           document.querySelectorAll("video[data-src]:not(.logo-video)")
         );
         const extraPosterPromises = allVideos
           .filter((v) => !v.poster)
-          .map((v) => {
-            const poster = v.dataset.src.replace(/\.\w+$/, ".webp");
-            v.poster = poster;
-            return new Promise((res) => {
-              const img = new Image();
-              img.onload = img.onerror = res;
-              img.src = poster;
-            });
-          });
+          .map(loadPoster);
 
         await Promise.all(extraPosterPromises);
 
-        /* 4 — Finally load EVERY video file */
+        /* 6 — Finally load EVERY video file */
         const groups = allVideos.reduce((acc, el) => {
           (acc[el.dataset.src] ??= []).push(el);
           return acc;
@@ -482,7 +502,7 @@
           })
         );
 
-        /* 5 — Now load the whitepaper PDF */
+        /* 7 — Now load the whitepaper PDF */
         const pdfEl = document.getElementById("whitepaper");
         if (pdfEl && pdfEl.dataset.src) {
           pdfEl.src = pdfEl.dataset.src;
