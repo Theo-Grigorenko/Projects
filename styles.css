@@ -181,7 +181,7 @@ h2.section-title::after {
 }
 
 .about-card h4:first-of-type {
-  margin-top: 0;
+  margin-top: 0.5em;
 }
 
 .project p,
