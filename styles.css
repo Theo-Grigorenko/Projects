@@ -197,6 +197,29 @@ h2.section-title::after {
   margin: 0.4em 0;
 }
 
+/* Latest videos layout (two vertical videos side-by-side) */
+.latest-videos-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  margin: 1em auto 0.3em;
+  max-width: calc(500px * 9 / 16 * 2 + 1em);
+}
+
+.latest-videos-layout .video-wrapper-vertical {
+  max-height: 500px;
+}
+
+@media (min-width: 1024px) {
+  .latest-videos-layout {
+    max-width: calc(600px * 9 / 16 * 2 + 1em);
+  }
+
+  .latest-videos-layout .video-wrapper-vertical {
+    max-height: 600px;
+  }
+}
+
 /* Drone videos layout */
 .drone-videos-layout {
   display: flex;
@@ -238,6 +261,28 @@ h2.section-title::after {
 .drone-videos-layout .media-item:hover .media-wrapper {
   outline: 2px solid var(--primary-color);
   outline-offset: 0px;
+}
+
+/* Latest videos: hover as a single unit */
+.latest-videos-layout {
+  cursor: pointer;
+  transition: transform 0.2s, outline 0.3s;
+  background: var(--media-bg);
+  border-radius: 6px;
+  overflow: hidden;
+  outline: 2px solid transparent;
+  outline-offset: 0px;
+}
+
+.latest-videos-layout:hover {
+  transform: scale(1.02);
+  outline-color: var(--primary-color);
+}
+
+.latest-videos-layout .media-item .media-wrapper {
+  border-radius: 0;
+  overflow: hidden;
+  margin-bottom: 0;
 }
 
 /* Drone designs carousel */

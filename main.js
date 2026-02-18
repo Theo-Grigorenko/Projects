@@ -49,7 +49,7 @@ window.addEventListener("load", async () => {
     }
   }
 
-  /* 1b — Version video posters in order: 4, 3, 2 */
+  /* 1b — Version video posters (latest first) */
   const loadPoster = (video) => {
     const poster = video.dataset.src.replace(/\.\w+$/, ".webp");
     video.poster = poster;
@@ -60,9 +60,16 @@ window.addEventListener("load", async () => {
     });
   };
 
+  const version5a = document.querySelector('video[data-src*="Version5a"]');
+  const version5b = document.querySelector('video[data-src*="Version5b"]');
   const version4 = document.querySelector('video[data-src*="Version4"]');
   const version3 = document.querySelector('video[data-src*="Version3"]');
   const version2 = document.querySelector('video[data-src*="Version2"]');
+
+  await Promise.all([
+    version5a && loadPoster(version5a),
+    version5b && loadPoster(version5b),
+  ].filter(Boolean));
 
   if (version4) await loadPoster(version4);
   if (version3) await loadPoster(version3);
@@ -155,24 +162,64 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentId = null;
 
   /* ─── DRONE TRACKING VIDEO HOVER INTERACTIVITY ─── */
+  const latestLayout = document.querySelector(".latest-videos-layout");
+  const latestVids = latestLayout
+    ? Array.from(latestLayout.querySelectorAll("video"))
+    : [];
   const droneVideos = document.querySelectorAll(
-    ".drone-videos-layout .media-item"
+    ".drone-videos-layout .media-item, .latest-videos-layout .media-item"
   );
-  droneVideos.forEach((item) => {
+
+  // Latest videos: hover on the container plays both together
+  if (latestLayout) {
+    latestLayout.addEventListener("mouseenter", () => {
+      // Pause all other drone/featured videos
+      document.querySelectorAll(".drone-videos-layout .media-item video").forEach((v) => v.pause());
+      featuredCards.forEach((card) => {
+        const v = card.querySelector("video");
+        if (v) v.pause();
+      });
+      // Play both latest videos together
+      latestVids.forEach((v) => { if (v.paused && v.src) v.play(); });
+    });
+
+    // Sync play/pause between the two latest videos
+    let syncing = false;
+    latestVids.forEach((vid) => {
+      vid.addEventListener("play", () => {
+        if (syncing) return;
+        syncing = true;
+        latestVids.forEach((other) => {
+          if (other !== vid && other.paused && other.src) other.play();
+        });
+        syncing = false;
+      });
+      vid.addEventListener("pause", () => {
+        if (syncing) return;
+        syncing = true;
+        latestVids.forEach((other) => {
+          if (other !== vid && !other.paused) other.pause();
+        });
+        syncing = false;
+      });
+    });
+  }
+
+  // Previous version videos: same as before but also pause latest
+  document.querySelectorAll(".drone-videos-layout .media-item").forEach((item) => {
     const vid = item.querySelector("video");
     if (vid) {
       item.addEventListener("mouseenter", () => {
         // Pause all other drone videos
-        droneVideos.forEach((otherItem) => {
-          if (otherItem !== item) {
-            const otherVid = otherItem.querySelector("video");
-            if (otherVid) otherVid.pause();
-          }
+        document.querySelectorAll(".drone-videos-layout .media-item video").forEach((v) => {
+          if (v !== vid) v.pause();
         });
+        // Pause latest videos
+        latestVids.forEach((v) => v.pause());
         // Pause all featured project videos
         featuredCards.forEach((card) => {
-          const otherVid = card.querySelector("video");
-          if (otherVid) otherVid.pause();
+          const v = card.querySelector("video");
+          if (v) v.pause();
         });
         // Play this video
         if (vid.paused && vid.src) vid.play();
