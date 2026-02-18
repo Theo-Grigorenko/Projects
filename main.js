@@ -183,24 +183,15 @@ document.addEventListener("DOMContentLoaded", () => {
       latestVids.forEach((v) => { if (v.paused && v.src) v.play(); });
     });
 
-    // Sync play/pause between the two latest videos
-    let syncing = false;
+    // First play triggers the other, then they become independent
+    let linked = true;
     latestVids.forEach((vid) => {
       vid.addEventListener("play", () => {
-        if (syncing) return;
-        syncing = true;
+        if (!linked) return;
+        linked = false;
         latestVids.forEach((other) => {
           if (other !== vid && other.paused && other.src) other.play();
         });
-        syncing = false;
-      });
-      vid.addEventListener("pause", () => {
-        if (syncing) return;
-        syncing = true;
-        latestVids.forEach((other) => {
-          if (other !== vid && !other.paused) other.pause();
-        });
-        syncing = false;
       });
     });
   }
