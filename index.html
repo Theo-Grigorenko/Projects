@@ -1,398 +1,578 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="icon" href="/assets/images/favicon.png" type="image/png" />
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Theo Grigorenko</title>
+    <meta
+      name="description"
+      content="Theo Grigorenko — freshman at Stony Brook University working on numerical simulations and applied artificial intelligence, including an anti-drone robotics platform."
+    />
+    <link rel="icon" href="assets/images/favicon.png" type="image/png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
+
+    <!-- largest poster near the top of the page -->
+    <link rel="preload" as="image" href="assets/videos/MultiTargetShoot.webp" />
+
     <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
-    <div class="container">
-      <section id="about">
-        <video
-          class="logo-video"
-          muted
-          playsinline
-          preload="none"
-          data-src="assets/videos/logo.webm"
-          oncontextmenu="return false;"
-        ></video>
-        <h2 class="section-title">About Me</h2>
-        <div class="about-card">
-          <p>
-            Hello! I'm Theo Grigorenko, a high school student interested in
-            numerical simulations and applied artificial intelligence
-            (especially with robotics).
-          </p>
-          <p>
-            <u>Please scroll</u> to see the projects below and learn more about
-            them (hover over the videos for them to play).
-          </p>
-        </div>
-      </section>
-
-      <section id="video-showcase">
-        <h2 class="section-title">Robotics Project</h2>
-        <div class="about-card">
-          <div class="latest-videos-layout">
-            <div class="media-item">
-              <div class="media-wrapper video-wrapper-vertical">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/Version5a.webm"
-                ></video>
-              </div>
-            </div>
-            <div class="media-item">
-              <div class="media-wrapper video-wrapper-vertical">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/Version5b.webm"
-                ></video>
-              </div>
-            </div>
+    <div class="page">
+      <!-- ══ LEFT RAIL (desktop) / DOCUMENT HEADER (mobile) ══ -->
+      <div class="side">
+        <header class="ident">
+          <video
+            class="logo"
+            autoplay
+            muted
+            playsinline
+            preload="none"
+            aria-hidden="true"
+            tabindex="-1"
+            data-logo
+            data-src="assets/videos/logo.webm"
+          ></video>
+          <div class="ident-text">
+            <h1>Theo Grigorenko</h1>
+            <p class="ident-sub">Numerical simulations &amp; applied AI</p>
           </div>
-          <p class="media-description centered-caption">
-            Latest version
-          </p>
-          <p class="media-description centered-caption caption-note">
-            *Videos were recorded at 2 separate times
-          </p>
+        </header>
 
-          <h4>Previous Versions</h4>
-          <div class="drone-videos-layout">
-            <div class="media-item version-4">
-              <div class="media-wrapper video-wrapper-vertical">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/Version4.webm"
-                ></video>
-              </div>
-              <p class="media-description">Version 4</p>
-            </div>
+        <nav class="rail" aria-label="Sections">
+          <ol class="rail-list">
+            <li>
+              <a class="rail-item" href="#about" data-rail="about">
+                <span class="rail-num" aria-hidden="true">01</span>
+                <span class="rail-body">
+                  <span class="rail-label">About</span>
+                  <span class="rail-meta">Start here</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="rail-item" href="#robotics" data-rail="robotics">
+                <span class="rail-num" aria-hidden="true">02</span>
+                <span class="rail-body">
+                  <span class="rail-label">Robotics Project</span>
+                  <span class="rail-meta">5 versions &middot; 2024&ndash;2026</span>
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="rail-item" href="#projects" data-rail="projects">
+                <span class="rail-num" aria-hidden="true">03</span>
+                <span class="rail-body">
+                  <span class="rail-label">Other Projects</span>
+                  <span class="rail-meta">2 projects</span>
+                </span>
+              </a>
+            </li>
+          </ol>
+        </nav>
+      </div>
 
-            <div class="right-videos">
-              <div class="media-item">
-                <div class="media-wrapper video-wrapper">
-                  <video
-                    controls
-                    muted
-                    playsinline
-                    preload="none"
-                    data-src="assets/videos/Version3.webm"
-                  ></video>
-                </div>
-                <p class="media-description">Version 3</p>
-              </div>
-              <div class="media-item">
-                <div class="media-wrapper video-wrapper">
-                  <video
-                    controls
-                    muted
-                    playsinline
-                    preload="none"
-                    data-src="assets/videos/Version2.webm"
-                  ></video>
-                </div>
-                <p class="media-description">Version 2</p>
-              </div>
-            </div>
+      <!-- ══ CONTENT COLUMN ══ -->
+      <main class="col">
+        <!-- ── A. About ── -->
+        <section id="about" class="sec" aria-labelledby="about-h">
+          <h2 class="sec-title" id="about-h">About Me</h2>
+          <div class="card">
+            <p>
+              Hello! I'm Theo Grigorenko, a freshman at Stony Brook University interested in
+              numerical simulations and applied artificial intelligence
+              (especially with robotics).
+            </p>
+            <p>
+              <u class="hl">Please scroll</u> to see the projects below and learn
+              more about them (hover over the videos for them to play).
+            </p>
           </div>
+        </section>
 
-          <div class="drone-designs-container">
-            <div class="swiper drone-designs-swiper">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide" data-design="1">
-                  <div class="media-item">
-                    <div class="media-wrapper design-wrapper">
-                      <img
-                        data-src="assets/images/Design1.png"
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+        <!-- ── B. Robotics Project ── -->
+        <section id="robotics" class="sec" aria-labelledby="robotics-h">
+          <h2 class="sec-title" id="robotics-h">Robotics Project</h2>
+          <div class="card">
+            <!-- B1 Latest version — the targeting tests and the current build,
+                 one block, every clip the same size -->
+            <div class="block">
+              <h3 class="sub">Latest Version</h3>
+              <div class="pair pair-lg">
+                <div class="mi">
+                  <div class="mw v">
+                    <video
+                      controls
+                      muted
+                      playsinline
+                      preload="none"
+                      data-src="assets/videos/MultiTargetShoot.webm"
+                      data-poster="assets/videos/MultiTargetShoot.webp"
+                    ></video>
+                  </div>
+                  <p class="cap">Multi-target engagement</p>
+                </div>
+                <div class="mi">
+                  <div class="mw v">
+                    <video
+                      controls
+                      muted
+                      playsinline
+                      preload="none"
+                      data-src="assets/videos/DroneShoot.webm"
+                      data-poster="assets/videos/DroneShoot.webp"
+                    ></video>
+                  </div>
+                  <p class="cap">Drone engagement</p>
+                </div>
+                <div class="mi">
+                  <div class="mw v">
+                    <video
+                      controls
+                      muted
+                      playsinline
+                      preload="none"
+                      data-sync-group="latest"
+                      data-src="assets/videos/Version5a.webm"
+                      data-poster="assets/videos/Version5a.webp"
+                    ></video>
+                  </div>
+                </div>
+                <div class="mi">
+                  <div class="mw v">
+                    <video
+                      controls
+                      muted
+                      playsinline
+                      preload="none"
+                      data-sync-group="latest"
+                      data-src="assets/videos/Version5b.webm"
+                      data-poster="assets/videos/Version5b.webp"
+                    ></video>
+                  </div>
+                </div>
+              </div>
+              <p class="cap cap-c note">*Videos were recorded at 2 separate times</p>
+            </div>
+
+            <!-- B3 Previous versions -->
+            <div class="block">
+              <h3 class="sub">Previous Versions</h3>
+              <div class="prev">
+                <div class="mi">
+                  <div class="mw v">
+                    <video
+                      controls
+                      muted
+                      playsinline
+                      preload="none"
+                      data-src="assets/videos/Version4.webm"
+                      data-poster="assets/videos/Version4.webp"
+                    ></video>
+                  </div>
+                  <p class="cap">Version 4</p>
+                </div>
+                <div class="mi">
+                  <div class="mw h">
+                    <video
+                      controls
+                      muted
+                      playsinline
+                      preload="none"
+                      data-src="assets/videos/Version3.webm"
+                      data-poster="assets/videos/Version3.webp"
+                    ></video>
+                  </div>
+                  <p class="cap">Version 3</p>
+                </div>
+                <div class="mi">
+                  <div class="mw v">
+                    <video
+                      controls
+                      muted
+                      playsinline
+                      preload="none"
+                      data-src="assets/videos/Version2.webm"
+                      data-poster="assets/videos/Version2.webp"
+                    ></video>
+                  </div>
+                  <p class="cap">Version 2</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- B4 Designs -->
+            <div class="block">
+              <h3 class="sub">Designs</h3>
+              <div class="designs" id="designs" tabindex="0" role="group" aria-label="Design renders">
+                <!-- 410KB of PNG: attached by the same observer the videos
+                     use, so none of it lands on the initial load. -->
+                <div class="mi design-slide">
+                  <div class="mw d">
+                    <img
+                      alt="Design 1"
+                      width="687"
+                      height="636"
+                      loading="lazy"
+                      decoding="async"
+                      data-src="assets/images/Design1.png"
+                    />
+                    <noscript
+                      ><img
+                        src="assets/images/Design1.png"
                         alt="Design 1"
-                      />
-                    </div>
-                    <p class="media-description">Phone Case 3D Model</p>
+                        width="687"
+                        height="636"
+                    /></noscript>
                   </div>
+                  <p class="cap">Phone Case 3D Model</p>
                 </div>
-                <div class="swiper-slide" data-design="2">
-                  <div class="media-item">
-                    <div class="media-wrapper design-wrapper">
-                      <img
-                        data-src="assets/images/Design2.png"
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                <div class="mi design-slide">
+                  <div class="mw d">
+                    <img
+                      alt="Design 2"
+                      width="726"
+                      height="649"
+                      loading="lazy"
+                      decoding="async"
+                      data-src="assets/images/Design2.png"
+                    />
+                    <noscript
+                      ><img
+                        src="assets/images/Design2.png"
                         alt="Design 2"
-                      />
-                    </div>
-                    <p class="media-description">First 3D Model</p>
+                        width="726"
+                        height="649"
+                    /></noscript>
                   </div>
+                  <p class="cap">First 3D Model</p>
                 </div>
-                <div class="swiper-slide" data-design="3">
-                  <div class="media-item">
-                    <div class="media-wrapper design-wrapper">
-                      <img
-                        data-src="assets/images/Design3.png"
-                        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                <div class="mi design-slide">
+                  <div class="mw d">
+                    <img
+                      alt="Design 3"
+                      width="770"
+                      height="646"
+                      loading="lazy"
+                      decoding="async"
+                      data-src="assets/images/Design3.png"
+                    />
+                    <noscript
+                      ><img
+                        src="assets/images/Design3.png"
                         alt="Design 3"
-                      />
-                    </div>
-                    <p class="media-description">Second 3D Model</p>
+                        width="770"
+                        height="646"
+                    /></noscript>
                   </div>
+                  <p class="cap">Second 3D Model</p>
                 </div>
               </div>
-              <div class="swiper-pagination"></div>
-              <div class="swiper-button-prev"></div>
-              <div class="swiper-button-next"></div>
-            </div>
-          </div>
-
-          <h4>Purpose</h4>
-          <p>
-            A scalable platform prototype for <b>public safety</b> against
-            <b>unauthorized drone activity</b>. With drones becoming more
-            affordable and autonomous delivery services emerging, there is a
-            growing need to <b>detect, track, and report</b> unauthorized flying
-            objects near governmental, public, and private buildings.
-          </p>
-
-          <h4>Quick Overview</h4>
-          <ul>
-            <li><b>Turret:</b> <u>Unloaded paintball (toy) gun</u></li>
-            <li><b>Frame:</b> Latest version using cut aluminum sheets</li>
-            <li>
-              <b>Detection:</b> D-Fine / YOLOv4 on self collected and annotated
-              dataset
-            </li>
-            <li><b>Range:</b> Tracks up to 200 feet away</li>
-            <li>
-              <b>Video:</b> Custom iPhone app streams to laptop (up to 15x zoom)
-            </li>
-            <li><b>Parts:</b> 3D printed mounts and components</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="projects">
-        <div class="project-header">
-          <h2 id="projects-title" class="section-title">Other Projects:</h2>
-          <div class="project-buttons">
-            <button class="project-btn" data-id="satya">Satya</button
-            ><span class="separator">,</span>
-            <button class="project-btn" data-id="ev">Electric Vehicle</button>
-          </div>
-        </div>
-
-        <div class="featured-projects">
-          <div class="project" data-id="satya">
-            <h3>Satya</h3>
-            <div class="media-item">
-              <div class="media-wrapper">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/satya-video.webm"
-                ></video>
+              <div class="dots" id="design-dots">
+                <button class="dot is-on" type="button" data-slide="0" aria-current="true" aria-label="Show design 1"></button>
+                <button class="dot" type="button" data-slide="1" aria-label="Show design 2"></button>
+                <button class="dot" type="button" data-slide="2" aria-label="Show design 3"></button>
               </div>
-              <p class="media-description">
-                Voting functionality on the Satya app
-              </p>
             </div>
-            <p>
-              Satya is an <b>information consensus platform</b> for experts to
-              monetarily back or challenge statements.
-            </p>
-            <p>
-              Experts are able to build their expertise through voting which is
-              <b>optimally weighed</b> to maximize the accuracy of the
-              consensus.
-            </p>
-          </div>
 
-          <div class="project" data-id="ev">
-            <h3>Electric Vehicle (SciOly Event)</h3>
-            <div class="media-item">
-              <div class="media-wrapper">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/ev-video.webm"
-                ></video>
-              </div>
-              <p class="media-description">New York State performance</p>
-            </div>
-            <p>
-              Science Olympiad event with the objective of a miniature electric
-              vehicle traveling a distance (8 meters to 10 meters) with the
-              <b>greatest accuracy and speed</b>.
-            </p>
-            <p>
-              I won a <b>silver medal</b> at the New York State competition
-              (2025) using a <b>PID controller</b> to modulate the voltage
-              applied to the motor.
-            </p>
-          </div>
-        </div>
-
-        <div class="selected-project-container">
-          <!-- Satya -->
-          <div class="selected-project" data-id="satya">
-            <div class="media-item">
-              <div class="media-wrapper">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/satya-video.webm"
-                ></video>
-              </div>
-              <p class="media-description">
-                Voting functionality on the Satya app
+            <!-- B5 Purpose -->
+            <div class="block">
+              <h3 class="sub">Purpose</h3>
+              <p>
+                A scalable platform prototype for <b>public safety</b> against
+                <b>unauthorized drone activity</b>. With drones becoming more
+                affordable and autonomous delivery services emerging, there is a
+                growing need to <b>detect, track, and report</b> unauthorized
+                flying objects near governmental, public, and private buildings.
               </p>
             </div>
 
-            <div class="images-container">
-              <div class="media-item">
-                <div class="media-wrapper">
-                  <img
-                    data-src="assets/images/satya-image1.png"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                    alt="Satya image 1"
-                  />
+            <!-- B6 Quick overview -->
+            <div class="block">
+              <h3 class="sub">Quick Overview</h3>
+              <dl class="spec">
+                <div class="spec-row">
+                  <dt>Turret</dt>
+                  <dd><u class="hl">Loaded paintball (toy) gun</u></dd>
                 </div>
-                <p class="media-description">
-                  Resilience of estimation simulation
-                </p>
-              </div>
-              <div class="media-item">
-                <div class="media-wrapper">
-                  <img
-                    data-src="assets/images/satya-image2.png"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
-                    alt="Satya image 2"
-                  />
+                <div class="spec-row">
+                  <dt>Frame</dt>
+                  <dd>Latest version using cut aluminum sheets</dd>
                 </div>
-                <p class="media-description">
-                  Experience estimation simulation
-                </p>
-              </div>
+                <div class="spec-row">
+                  <dt>Detection</dt>
+                  <dd>D-Fine / YOLOv4 on self collected and annotated dataset</dd>
+                </div>
+                <div class="spec-row">
+                  <dt>Range</dt>
+                  <dd>Tracks up to 200 feet away</dd>
+                </div>
+                <div class="spec-row">
+                  <dt>Video</dt>
+                  <dd>Custom iPhone app streams to laptop (up to 15x zoom)</dd>
+                </div>
+                <div class="spec-row">
+                  <dt>Parts</dt>
+                  <dd>3D printed mounts and components</dd>
+                </div>
+              </dl>
             </div>
-            <p>
-              Satya is an <b>information consensus platform</b> for experts to
-              monetarily back or challenge statements.
-            </p>
-            <p>
-              Experts are able to build their expertise through voting which is
-              <b>optimally weighed</b> to maximize the accuracy of the
-              consensus.
-            </p>
-            <p>
-              The charts and graphs above show a simulation of random truthful
-              and malicious agents assigned an intelligence value. The agents
-              are then given statements to vote on, and the simulation shows how
-              the estimation of agents' experience changes over time and the
-              resilience of estimation.
-            </p>
+          </div>
+        </section>
 
-            <p>The app is available on Windows and iOS.</p>
-            <div class="cta-row">
-              <a
-                href="https://satya-website.vercel.app/"
-                target="_blank"
-                class="button bigger_button"
-                >Learn More on Satya's Website</a
+        <!-- ── C. Other Projects ── -->
+        <section id="projects" class="sec" aria-labelledby="projects-h">
+          <div class="proj-head">
+            <h2 class="sec-title" id="projects-h">Other Projects:</h2>
+            <div class="tabs">
+              <button
+                class="tab"
+                type="button"
+                data-id="satya"
+                aria-expanded="false"
+                aria-controls="panel-satya"
               >
+                Satya
+              </button>
+              <button
+                class="tab"
+                type="button"
+                data-id="ev"
+                aria-expanded="false"
+                aria-controls="panel-ev"
+              >
+                Electric Vehicle
+              </button>
             </div>
-            <div class="whitepaper-row">
-              <div class="whitepaper-section" id="whitepaper-section">
+            <p class="proj-hint">Click a project to enlarge</p>
+          </div>
+
+          <div class="proj-grid" id="proj-grid">
+            <!-- C1 Satya card -->
+            <article class="card proj" data-id="satya">
+              <h3 class="proj-title">
+                <button class="proj-open" type="button" data-id="satya">Satya</button>
+              </h3>
+              <div class="mi">
+                <div class="mw h">
+                  <video
+                    controls
+                    muted
+                    playsinline
+                    preload="none"
+                    data-src="assets/videos/satya-video.webm"
+                    data-poster="assets/videos/satya-video.webp"
+                  ></video>
+                </div>
+                <p class="cap">Voting functionality on the Satya app</p>
+              </div>
+              <p>
+                Satya is an <b>information consensus platform</b> for experts to
+                monetarily back or challenge statements.
+              </p>
+              <p>
+                Experts are able to build their expertise through voting which is
+                <b>optimally weighed</b> to maximize the accuracy of the
+                consensus.
+              </p>
+            </article>
+
+            <!-- C2 Electric Vehicle card -->
+            <article class="card proj" data-id="ev">
+              <h3 class="proj-title">
+                <button class="proj-open" type="button" data-id="ev">
+                  Electric Vehicle (SciOly Event)
+                </button>
+              </h3>
+              <div class="mi">
+                <div class="mw h">
+                  <video
+                    controls
+                    muted
+                    playsinline
+                    preload="none"
+                    data-src="assets/videos/ev-video.webm"
+                    data-poster="assets/videos/ev-video.webp"
+                  ></video>
+                </div>
+                <p class="cap">New York State performance</p>
+              </div>
+              <p>
+                Science Olympiad event with the objective of a miniature electric
+                vehicle traveling a distance (8 meters to 10 meters) with the
+                <b>greatest accuracy and speed</b>.
+              </p>
+              <p>
+                I won a <b>silver medal</b> at the New York State competition
+                (2025) using a <b>PID controller</b> to modulate the voltage
+                applied to the motor.
+              </p>
+            </article>
+          </div>
+
+          <!-- Detail panels -->
+          <div class="panels">
+            <!-- Satya detail -->
+            <article class="card panel" id="panel-satya" data-id="satya" hidden>
+              <div class="panel-head">
+                <h3>Satya</h3>
+                <button class="panel-close" type="button" data-id="satya">Close</button>
+              </div>
+
+              <div class="mi mi-narrow">
+                <div class="mw h">
+                  <video
+                    controls
+                    muted
+                    playsinline
+                    preload="none"
+                    data-src="assets/videos/satya-video.webm"
+                    data-poster="assets/videos/satya-video.webp"
+                  ></video>
+                </div>
+                <p class="cap">Voting functionality on the Satya app</p>
+              </div>
+
+              <div class="figs">
+                <figure class="fig">
+                  <img
+                    src="assets/images/satya-image1.png"
+                    alt="Satya image 1"
+                    width="502"
+                    height="442"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption class="cap">Resilience of estimation simulation</figcaption>
+                </figure>
+                <figure class="fig">
+                  <img
+                    src="assets/images/satya-image2.png"
+                    alt="Satya image 2"
+                    width="1000"
+                    height="600"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption class="cap">Experience estimation simulation</figcaption>
+                </figure>
+              </div>
+
+              <p>
+                Satya is an <b>information consensus platform</b> for experts to
+                monetarily back or challenge statements.
+              </p>
+              <p>
+                Experts are able to build their expertise through voting which is
+                <b>optimally weighed</b> to maximize the accuracy of the
+                consensus.
+              </p>
+              <p>
+                The charts and graphs above show a simulation of random truthful
+                and malicious agents assigned an intelligence value. The agents
+                are then given statements to vote on, and the simulation shows
+                how the estimation of agents' experience changes over time and
+                the resilience of estimation.
+              </p>
+              <p>The app is available on Windows and iOS.</p>
+
+              <p class="cta-row">
+                <a
+                  class="btn"
+                  href="https://satya-website.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >Learn More on Satya's Website</a
+                >
+              </p>
+
+              <div class="wp-wrap">
                 <iframe
-                  data-src="assets/pdfs/whitepaper.pdf"
-                  frameborder="0"
-                  class="whitepaper"
+                  class="wp"
                   id="whitepaper"
+                  title="Satya whitepaper"
+                  loading="lazy"
+                  data-src="assets/pdfs/whitepaper.pdf"
                 ></iframe>
               </div>
-            </div>
-          </div>
+              <p class="wp-fallback">
+                <a href="assets/pdfs/whitepaper.pdf" target="_blank" rel="noopener noreferrer"
+                  >Open the whitepaper (PDF)</a
+                >
+              </p>
+            </article>
 
-          <!-- EV -->
-          <div class="selected-project" data-id="ev">
-            <div class="media-item">
-              <div class="media-wrapper">
-                <video
-                  controls
-                  muted
-                  playsinline
-                  preload="none"
-                  data-src="assets/videos/ev-video.webm"
-                ></video>
+            <!-- EV detail -->
+            <article class="card panel" id="panel-ev" data-id="ev" hidden>
+              <div class="panel-head">
+                <h3>Electric Vehicle (SciOly Event)</h3>
+                <button class="panel-close" type="button" data-id="ev">Close</button>
               </div>
-              <p class="media-description">New York State performance</p>
-            </div>
-            <div class="images-container">
-              <div class="media-item">
-                <div class="media-wrapper">
+
+              <div class="mi">
+                <div class="mw h">
+                  <video
+                    controls
+                    muted
+                    playsinline
+                    preload="none"
+                    data-src="assets/videos/ev-video.webm"
+                    data-poster="assets/videos/ev-video.webp"
+                  ></video>
+                </div>
+                <p class="cap cap-c">New York State performance</p>
+              </div>
+
+              <div class="figs">
+                <figure class="fig">
                   <img
-                    data-src="assets/images/ev-image1.webp"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                    class="portrait"
+                    src="assets/images/ev-image1.webp"
                     alt="Electric Vehicle image 1"
+                    width="772"
+                    height="1029"
+                    loading="lazy"
+                    decoding="async"
                   />
-                </div>
-                <p class="media-description">Silver medal 🎉</p>
-              </div>
-              <div class="media-item">
-                <div class="media-wrapper">
+                  <figcaption class="cap">Silver medal 🎉</figcaption>
+                </figure>
+                <figure class="fig">
                   <img
-                    data-src="assets/images/ev-image2.png"
-                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                    src="assets/images/ev-image2.png"
                     alt="Electric Vehicle image 2"
+                    width="1160"
+                    height="487"
+                    loading="lazy"
+                    decoding="async"
                   />
-                </div>
-                <p class="media-description">Simulation of optimal control</p>
+                  <figcaption class="cap">Simulation of optimal control</figcaption>
+                </figure>
               </div>
-            </div>
-            <p>
-              Science Olympiad event with the objective of a miniature electric
-              vehicle traveling a distance (8 meters to 10 meters) with the
-              <b>greatest accuracy and speed</b>.
-            </p>
-            <p>
-              I won a <b>silver medal</b> at the New York State competition
-              (2025) using a <b>PID controller</b> to modulate the voltage
-              applied to the motor.
-            </p>
+
+              <p>
+                Science Olympiad event with the objective of a miniature electric
+                vehicle traveling a distance (8 meters to 10 meters) with the
+                <b>greatest accuracy and speed</b>.
+              </p>
+              <p>
+                I won a <b>silver medal</b> at the New York State competition
+                (2025) using a <b>PID controller</b> to modulate the voltage
+                applied to the motor.
+              </p>
+            </article>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </div>
 
-    <footer>© 2026 Theo Grigorenko</footer>
+    <footer class="foot">© 2026 Theo Grigorenko</footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="main.js"></script>
   </body>
 </html>
