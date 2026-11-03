@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting…</title>
+  <script>
+    // Old deep links like /Projects/assets/x.png → /assets/x.png on the root site
+    var path = location.pathname.replace(/^\/projects(\/|$)/i, "/");
+    location.replace("https://theo-grigorenko.github.io" + path + location.search + location.hash);
+  </script>
+  <meta http-equiv="refresh" content="0; url=https://theo-grigorenko.github.io/">
+</head>
+<body>
+  <a href="https://theo-grigorenko.github.io/">Click here</a> if you are not redirected.
+</body>
+</html>
